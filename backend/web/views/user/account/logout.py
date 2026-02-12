@@ -1,0 +1,14 @@
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)#强制登录才可以访问退出
+    def post(self, request):
+        response = Response({
+            'result': 'success',
+        })
+        response.delete_cookie('refresh_token')
+        return response
