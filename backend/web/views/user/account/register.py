@@ -16,7 +16,7 @@ class RegisterView(APIView):
                 return Response({'result': '用户名和密码不能为空'})
 
             if User.objects.filter(username=username).exists():
-                return Response({'result':'该用户已经存在'})
+                return Response({'result':'该用户已经存在 '})
 
             user=User.objects.create_user(username=username, password=password)
             user_profile=UserProfile.objects.create(user=user)

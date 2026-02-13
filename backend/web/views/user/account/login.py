@@ -16,7 +16,7 @@ class LoginView(APIView):
                 return Response({'result': '用户名和密码不能为空'})
             user=authenticate(username=username, password=password)#数据库查询
             if user is not None:
-                user_profile = UserProfile.objects.get(username=username)
+                user_profile = UserProfile.objects.get(user=user)
                 refresh=RefreshToken.for_user(user)#生成jwt
                 response=Response({
                     'result':'success',
@@ -41,6 +41,8 @@ class LoginView(APIView):
 
 
         except:
+            import traceback
+            traceback.print_exc()
             return Response({
                 'result': '系统异常,稍后再试'
             })
