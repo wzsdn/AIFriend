@@ -13,16 +13,14 @@ function closeMenu() {
   if (element && element instanceof HTMLElement) element.blur()
 }
 async function handleLogout(){
-  try{
-    const res=await api.post('api/user/account/logout/')
-    if(res.request==='success'){
-      user.logout()
-     await router.push({
-        name:'homepage-index'
-      })
-    }
-  }catch (e){
-    console.log(e)
+   try {
+    await api.post("/api/user/account/logout/", {});
+  } catch (e) {
+    console.log(e);
+  } finally {
+    user.logout();
+    closeMenu();
+    await router.push({ name: "login-index" });
   }
 }
 </script>
@@ -52,7 +50,7 @@ async function handleLogout(){
           </RouterLink>
         </li>
         <li>
-          <RouterLink @click="closeMenu" :to="{name:'user-profile-index',params:{user_id:user.id}}" class="text-base font-bold py-3 active:bg-black/20 active:scale-[0.98] transition-colors">
+          <RouterLink @click="closeMenu" :to="{name:'user-profile-index'}" class="text-base font-bold py-3 active:bg-black/20 active:scale-[0.98] transition-colors">
             <UserProfileIcon/>
             编辑资料
           </RouterLink>
