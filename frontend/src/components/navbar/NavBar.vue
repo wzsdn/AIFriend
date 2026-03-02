@@ -8,7 +8,7 @@ import SearchIcon from "@/components/navbar/icons/SearchIcon.vue";
 import {useUserStore} from "@/stores/user.js";
 import UserMenu from "@/components/navbar/UserMenu.vue";
 
-const user=useUserStore()
+const user = useUserStore()
 </script>
 
 <template>
@@ -34,15 +34,18 @@ const user=useUserStore()
           </div>
         </div>
         <div class="navbar-end">
-          <RouterLink v-if="user.isLogin()" :to="{name:'create-index'}" active-class="btn-active" class="btn btn-ghost text-base mr-6">
-            <CreateIcon />
+          <RouterLink v-if="user.isLogin()" :to="{name:'create-index'}" active-class="btn-active"
+                      class="btn btn-ghost text-lg mr-6">
+            <CreateIcon/>
             创作
           </RouterLink>
-
-          <RouterLink v-if="user.hasPulledUserInfo && !user.isLogin()" :to="{name:'login-index'}" active-class="btn-active"
-                      class="btn btn-ghost text-lg">登录</RouterLink>
-          <UserMenu v-else-if="user.isLogin()" />
+          <RouterLink v-if="!user.isLogin()" :to="{name:'login-index'}"
+                      active-class="btn-active" class="btn btn-ghost text-lg">
+            登录
+          </RouterLink>
+          <UserMenu v-else-if="user.isLogin()"/>
         </div>
+
       </nav>
       <!-- Page content here -->
       <slot></slot>
@@ -55,19 +58,22 @@ const user=useUserStore()
         <ul class="menu w-full grow">
           <!-- List item -->
           <li>
-            <RouterLink :to="{name:'homepage-index'}" active-class="menu-active" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3" data-tip="Homepage">
+            <RouterLink :to="{name:'homepage-index'}" active-class="menu-active"
+                        class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3" data-tip="Homepage">
               <HomepageIcon/>
               <span class="is-drawer-close:hidden text-base ml-2 whitespace-nowrap">首页</span>
             </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{name:'friend-index'}" active-class="menu-active" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3" data-tip="friend">
+            <RouterLink :to="{name:'friend-index'}" active-class="menu-active"
+                        class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3" data-tip="friend">
               <FriendIcon/>
               <span class="is-drawer-close:hidden text-base ml-2 whitespace-nowrap">好友</span>
             </RouterLink>
           </li>
           <li>
-            <RouterLink :to="{name:'create-index'}" active-class="menu-active" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3" data-tip="create">
+            <RouterLink :to="{name:'create-index'}" active-class="menu-active"
+                        class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-3" data-tip="create">
               <CreateIcon/>
               <span class="is-drawer-close:hidden text-base ml-2 whitespace-nowrap">创作</span>
             </RouterLink>
