@@ -1,9 +1,14 @@
 from django.urls import path, re_path
+from django.views.generic import CreateView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
+from web.views.create.character.create import CreateCharacterView
+from web.views.create.character.get_single import GetSingleCharacterView
+from web.views.create.character.remove import RemoveCharacterView
+from web.views.create.character.update import UpdateCharacterView
 from web.views.index import index
 from web.views.user.account.get_user_info import GetUserInfoView
 from web.views.user.account.login import LoginView
@@ -22,6 +27,10 @@ urlpatterns = [
     path('api/user/account/get_user_info/', GetUserInfoView.as_view()),
 
     path('api/user/profile/update/', UpdateProfileView.as_view()),
+    path('api/create/character/create/', CreateCharacterView.as_view()),
+    path('api/create/character/update/', UpdateCharacterView.as_view()),
+    path('api/create/character/remove/', RemoveCharacterView.as_view()),
+    path('api/create/character/get_single/', GetSingleCharacterView.as_view()),
     path('', index),
     re_path(r'^(?!media/|static/|assets/).*$', index)
 ]
